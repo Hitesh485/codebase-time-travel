@@ -9,27 +9,36 @@ public class GitStateManager {
     1. Capture current state:
         Ask GitRepositoryService: “Where are we right now?”
         Store that information safely in memory
+
+    2.   Store it safely in memory
+
+    3.    Restore Git to original state
+
+    4.    Protect against misuse (invalid calls)
+
 */
-    private final GitRepositoryService gitRepositoryService;
+private final GitRepositoryService gitRepositoryService;
+
+    // Stored in memory (single active state)
     private GitState savedState;
 
     public GitStateManager(GitRepositoryService gitRepositoryService) {
         this.gitRepositoryService = gitRepositoryService;
     }
 
-    // Step 1: Capture current state
+    // 1️⃣ Capture current state
     public void saveCurrentState() throws IOException {
         if (savedState != null) {
             throw new IllegalStateException("Git state already saved");
         }
 
-        String branch = gitRepositoryService.getCurrentBranch();
-        String commit = gitRepositoryService.getCurrentCommitHash();
+        String currentBranch = gitRepositoryService.getCurrentBranch();
+        String currentCommit = gitRepositoryService.getCurrentCommitHash();
 
-        this.savedState = new GitState(branch, commit);
+        this.savedState = new GitState(currentBranch, currentCommit);
     }
 
-    // Step 2: Access saved state
+    // 2️⃣ Expose saved state (read-only)
     public GitState getSavedState() {
         if (savedState == null) {
             throw new IllegalStateException("No Git state saved");
@@ -37,7 +46,24 @@ public class GitStateManager {
         return savedState;
     }
 
-    // Step 3: Clear state (after restore)
+    // 3️⃣ Restore original state
+    public void restoreState() throws IOException {
+        if (savedState == null) {
+            throw new IllegalStateException("No Git state to restore");
+        }
+
+        // Prefer restoring by branch (safer)
+        if (savedState.getBranchName() != null) {
+            gitRepositoryService.checkoutBranch(savedState.getBranchName());
+        } else {
+            gitRepositoryService.checkoutCommit(savedState.getCommitHash());
+        }
+
+        // Clear state after successful restore
+        clearState();
+    }
+
+    // 4️⃣ Protection & cleanup
     public void clearState() {
         this.savedState = null;
     }
