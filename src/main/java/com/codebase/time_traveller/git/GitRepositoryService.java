@@ -1,8 +1,11 @@
 package com.codebase.time_traveller.git;
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 import java.io.File;
@@ -31,6 +34,29 @@ public class GitRepositoryService {
         return repository;
     }
 
+
+
+    public void checkoutCommit(String commitHash) {
+        try {
+            Git git = new Git(repository);
+            git.checkout()
+                    .setName(commitHash)
+                    .call();
+        } catch (GitAPIException e) {
+            throw new RuntimeException("Failed to checkout commit: " + commitHash, e);
+        }
+    }
+
+    public void checkoutBranch(String branchName) {
+        try {
+            Git git = new Git(repository);
+            git.checkout()
+                    .setName(branchName)
+                    .call();
+        } catch (GitAPIException e) {
+            throw new RuntimeException("Failed to checkout branch: " + branchName, e);
+        }
+    }
 
 
 

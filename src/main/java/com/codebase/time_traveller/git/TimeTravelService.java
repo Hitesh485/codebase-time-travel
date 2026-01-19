@@ -1,5 +1,7 @@
 package com.codebase.time_traveller.git;
 
+import com.codebase.time_traveller.git.model.GitState;
+
 import java.io.IOException;
 
 public class TimeTravelService {
