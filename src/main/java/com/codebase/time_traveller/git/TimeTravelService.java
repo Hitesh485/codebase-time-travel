@@ -15,7 +15,7 @@ public class TimeTravelService {
         this.gitStateManager = gitStateManager;
     }
 
-    // Step 1: Time travel to a specific commit
+    // Step 1->  travel to a specific commit
     public void travelToCommit(String commitHash) throws IOException {
         // Save current position (only once)
         gitStateManager.saveCurrentState();
@@ -24,11 +24,11 @@ public class TimeTravelService {
         gitRepositoryService.checkoutCommit(commitHash);
     }
 
-    // Step 2: Return back to original position
+    // Step 2  : Return back to original position
     public void returnToOriginalState() throws IOException {
         GitState state = gitStateManager.getSavedState();
 
-        // Prefer restoring by branch (safer)
+        // Prefer restoring by branch (more safer)
         if (state.getBranchName() != null) {
             gitRepositoryService.checkoutBranch(state.getBranchName());
         } else {

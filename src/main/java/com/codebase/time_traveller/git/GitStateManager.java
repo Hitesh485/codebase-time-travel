@@ -26,7 +26,7 @@ private final GitRepositoryService gitRepositoryService;
         this.gitRepositoryService = gitRepositoryService;
     }
 
-    // 1️⃣ Capture current state
+    // 1️ Capture current state
     public void saveCurrentState() throws IOException {
         if (savedState != null) {
             throw new IllegalStateException("Git state already saved");
@@ -38,7 +38,7 @@ private final GitRepositoryService gitRepositoryService;
         this.savedState = new GitState(currentBranch, currentCommit);
     }
 
-    // 2️⃣ Expose saved state (read-only)
+    // 2⃣  Expose saved state (read-only)
     public GitState getSavedState() {
         if (savedState == null) {
             throw new IllegalStateException("No Git state saved");
@@ -46,7 +46,7 @@ private final GitRepositoryService gitRepositoryService;
         return savedState;
     }
 
-    // 3️⃣ Restore original state
+    // 3️ Restore original state
     public void restoreState() throws IOException {
         if (savedState == null) {
             throw new IllegalStateException("No Git state to restore");
@@ -63,7 +63,7 @@ private final GitRepositoryService gitRepositoryService;
         clearState();
     }
 
-    // 4️⃣ Protection & cleanup
+    // 4️ Protection & cleanup
     public void clearState() {
         this.savedState = null;
     }
