@@ -1,4 +1,4 @@
-package com.codebase.time_traveller.explaination;
+package com.codebase.time_traveller.explanation;
 
 public class DiffSummary {
     private int totalFiles;

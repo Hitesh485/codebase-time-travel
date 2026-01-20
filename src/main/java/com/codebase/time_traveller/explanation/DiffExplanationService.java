@@ -1,4 +1,4 @@
-package com.codebase.time_traveller.explaination;
+package com.codebase.time_traveller.explanation;
 
 import com.codebase.time_traveller.diff.model.FileDiff;
 import com.codebase.time_traveller.diff.model.LineChange;
