@@ -1,18 +1,18 @@
 package com.codebase.time_traveller.diff.model;
 
-import org.eclipse.jgit.diff.DiffEntry;
+import com.codebase.time_traveller.explanation.ChangeType;
 
 public class LineChange {
 
-    private final DiffEntry.ChangeType type;
+    private final ChangeType type;
     private final String content;
 
-    public LineChange(DiffEntry.ChangeType type, String content) {
+    public LineChange(ChangeType type, String content) {
         this.type = type;
         this.content = content;
     }
 
-    public DiffEntry.ChangeType getType() {
+    public ChangeType getType() {
         return type;
     }
 
@@ -20,3 +20,4 @@ public class LineChange {
         return content;
     }
 }
+
