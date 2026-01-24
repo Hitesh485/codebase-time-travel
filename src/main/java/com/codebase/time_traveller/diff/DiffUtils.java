@@ -6,7 +6,6 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
 public class DiffUtils {
-
     public static CanonicalTreeParser prepareTreeParser(
             Repository repository,
             ObjectId treeId

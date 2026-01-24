@@ -1,6 +1,7 @@
 package com.codebase.time_traveller.diff.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FileDiff {
     private final String filePath;
