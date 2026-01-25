@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 
-public class Day12ExecutionTest {
+public class Day13ExecutionTest {
 
     @Test
     void runTestsForEachCommit() throws Exception {
