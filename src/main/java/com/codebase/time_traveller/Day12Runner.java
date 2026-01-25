@@ -1,7 +1,9 @@
 package com.codebase.time_traveller;
 
 import com.codebase.time_traveller.git.GitCheckoutService;
+import com.codebase.time_traveller.testexecution.TestExecutionFacade;
 import com.codebase.time_traveller.testexecution.TestExecutionService;
+import com.codebase.time_traveller.testexecution.TestResult;
 
 import java.util.List;
 
