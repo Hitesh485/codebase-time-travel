@@ -1,7 +1,11 @@
 package com.codebase.time_traveller.api;
 
+import com.codebase.time_traveller.api.dto.TimeTravelRequest;
+import com.codebase.time_traveller.api.dto.TimeTravelResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 public class TimeTravelController {
     private final TimeTravelFacade facade;
