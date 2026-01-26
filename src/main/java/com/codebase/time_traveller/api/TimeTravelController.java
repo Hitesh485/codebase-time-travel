@@ -1,0 +1,26 @@
+package com.codebase.time_traveller.api;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+public class TimeTravelController {
+    private final TimeTravelFacade facade;
+
+    public TimeTravelController(TimeTravelFacade facade) {
+        this.facade = facade;
+    }
+
+    @PostMapping("/analyze")
+    public TimeTravelResponse analyze(@RequestBody TimeTravelRequest request)
+            throws Exception {
+
+        // Temporary: commits hardcoded (later dynamic)
+        List<String> commits = List.of(
+                "1463b42d",
+                "f431baf0",
+                "579a79a5"
+        );
+
+        return facade.analyze(commits);
+    }
+}
