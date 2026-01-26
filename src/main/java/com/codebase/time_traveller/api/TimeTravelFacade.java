@@ -1,13 +1,17 @@
 package com.codebase.time_traveller.api;
 
+import com.codebase.time_traveller.api.dto.RegressionDTO;
+import com.codebase.time_traveller.api.dto.TimeTravelResponse;
 import com.codebase.time_traveller.regression.RegressionDetectionService;
 import com.codebase.time_traveller.regression.RegressionResult;
 import com.codebase.time_traveller.testexecution.TestExecutionFacade;
 import com.codebase.time_traveller.testexecution.TestResult;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class TimeTravelFacade {
 
     private final TestExecutionFacade testExecutionFacade;

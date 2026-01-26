@@ -3,9 +3,11 @@ package com.codebase.time_traveller.regression;
 import com.codebase.time_traveller.diff.DiffService;
 import com.codebase.time_traveller.diff.model.FileDiff;
 import com.codebase.time_traveller.testexecution.TestResult;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RegressionDetectionService {
     private final DiffService diffService;
 
