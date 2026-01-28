@@ -11,11 +11,12 @@ import org.eclipse.jgit.patch.HunkHeader;
 //import com.codebase.time_traveller.explanation.ChangeType;
 import org.eclipse.jgit.diff.DiffEntry;
 import com.codebase.time_traveller.diff.DiffUtils;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class DiffService {
     private final Repository repository;
 
