@@ -16,14 +16,18 @@ public class TimeTravelFacade {
 
     private final TestExecutionFacade testExecutionFacade;
     private final RegressionDetectionService regressionService;
+    private final GitCommitService commitService;
 
     public TimeTravelFacade(TestExecutionFacade testExecutionFacade,
                             RegressionDetectionService regressionService) {
         this.testExecutionFacade = testExecutionFacade;
         this.regressionService = regressionService;
+        this.commitService = commitservice;
     }
 
-    public TimeTravelResponse analyze(List<String> commits) throws Exception {
+    public TimeTravelResponse analyze() throws Exception {
+
+        List<String> commits = commitService.getAllCommits();
 
         List<TestResult> results =
                 testExecutionFacade.executeForCommits(commits);
