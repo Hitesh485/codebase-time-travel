@@ -20,16 +20,8 @@ public class TimeTravelController {
     }
 
     @PostMapping("/analyze")
-    public TimeTravelResponse analyze(@RequestBody TimeTravelRequest request)
-            throws Exception {
-
-        // Temporary: commits hardcoded (later dynamic)
-        List<String> commits = List.of(
-                "1463b42d",
-                "f431baf0",
-                "579a79a5"
-        );
-
-        return facade.analyze(commits);
+    public TimeTravelResponse analyze(@RequestBody TimeTravelRequest request) throws Exception
+    {
+        return facade.analyze();
     }
 }

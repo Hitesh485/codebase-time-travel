@@ -2,6 +2,7 @@ package com.codebase.time_traveller.api;
 
 import com.codebase.time_traveller.api.dto.RegressionDTO;
 import com.codebase.time_traveller.api.dto.TimeTravelResponse;
+import com.codebase.time_traveller.diff.model.FileDiff;
 import com.codebase.time_traveller.git.GitCommitService;
 import com.codebase.time_traveller.regression.RegressionDetectionService;
 import com.codebase.time_traveller.regression.RegressionResult;
@@ -20,10 +21,10 @@ public class TimeTravelFacade {
     private final GitCommitService commitService;
 
     public TimeTravelFacade(TestExecutionFacade testExecutionFacade,
-                            RegressionDetectionService regressionService) {
+                            RegressionDetectionService regressionService, GitCommitService commitService) {
         this.testExecutionFacade = testExecutionFacade;
         this.regressionService = regressionService;
-        this.commitService = commitservice;
+        this.commitService = commitService;
     }
 
     public TimeTravelResponse analyze() throws Exception {
@@ -43,8 +44,8 @@ public class TimeTravelFacade {
         List<String> changedFiles =
                 regression.getDiffs()
                         .stream()
-                        .map(f -> f.getFilePath())
-                        .collect(Collectors.toList());
+                        .map(FileDiff::getFilePath)
+                        .toList();
 
         RegressionDTO dto = new RegressionDTO(
                 regression.getLastPassingCommit(),
