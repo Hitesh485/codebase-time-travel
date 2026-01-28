@@ -1,5 +1,8 @@
 package com.codebase.time_traveller.testexecution;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class TestExecutionService {
 
     public boolean runTests() {
