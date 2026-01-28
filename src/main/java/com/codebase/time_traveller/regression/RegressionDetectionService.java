@@ -6,7 +6,6 @@ import com.codebase.time_traveller.testexecution.TestResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 @Service
 public class RegressionDetectionService {
     private final DiffService diffService;
