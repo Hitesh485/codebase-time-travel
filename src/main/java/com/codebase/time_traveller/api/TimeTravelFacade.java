@@ -9,6 +9,7 @@ import com.codebase.time_traveller.regression.RegressionResult;
 import com.codebase.time_traveller.testexecution.TestExecutionFacade;
 import com.codebase.time_traveller.testexecution.TestResult;
 import org.springframework.stereotype.Service;
+import com.codebase.time_traveller.regression.BinaryRegressionService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class TimeTravelFacade {
         this.testExecutionFacade = testExecutionFacade;
         this.regressionService = regressionService;
         this.commitService = commitService;
+        this.binaryRegressionService = binaryRegressionService;
     }
 
     public TimeTravelResponse analyze() throws Exception {
