@@ -6,4 +6,5 @@ public enum ChangeType {
     FILE_REMOVED,
     LINE_ADDED,
     LINE_REMOVED,
+    LINE_MODIFIED,
 }

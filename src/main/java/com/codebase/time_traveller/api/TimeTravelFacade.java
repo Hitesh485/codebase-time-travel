@@ -4,6 +4,7 @@ import com.codebase.time_traveller.api.dto.RegressionDTO;
 import com.codebase.time_traveller.api.dto.TimeTravelResponse;
 import com.codebase.time_traveller.diff.model.FileDiff;
 import com.codebase.time_traveller.explanation.ExplanationResult;
+import com.codebase.time_traveller.explanation.RegressionExplanationEngine;
 import com.codebase.time_traveller.git.GitCommitService;
 import com.codebase.time_traveller.regression.RegressionDetectionService;
 import com.codebase.time_traveller.regression.RegressionResult;
@@ -29,7 +30,7 @@ public class TimeTravelFacade {
         this.testExecutionFacade = testExecutionFacade;
         this.regressionService = regressionService;
         this.commitService = commitService;
-        this.binaryRegressionService = binaryRegressionService;
+        this.binaryRegressionService=binaryRegressionService;
     }
 
     public TimeTravelResponse analyze() throws Exception {
@@ -42,12 +43,15 @@ public class TimeTravelFacade {
         RegressionResult regression =
                 binaryRegressionService.findRegression(commits);
 
-        ExplanationResult explanation =
-                explanationEngine.explain(regression);
 
 
 //        RegressionResult regression =
 //                regressionService.detectRegression(results);
+
+
+
+//        ExplanationResult explanation =
+//                regressionExplanationEngine.explain(regression);
 
         if (regression == null) {
             return new TimeTravelResponse(false, null);
