@@ -19,9 +19,11 @@ public class TimeTravelFacade {
     private final TestExecutionFacade testExecutionFacade;
     private final RegressionDetectionService regressionService;
     private final GitCommitService commitService;
+    private final BinaryRegressionService binaryRegressionService;
 
     public TimeTravelFacade(TestExecutionFacade testExecutionFacade,
-                            RegressionDetectionService regressionService, GitCommitService commitService) {
+                            RegressionDetectionService regressionService, GitCommitService commitService,
+                            BinaryRegressionService binaryRegressionService) {
         this.testExecutionFacade = testExecutionFacade;
         this.regressionService = regressionService;
         this.commitService = commitService;
@@ -35,7 +37,10 @@ public class TimeTravelFacade {
                 testExecutionFacade.executeForCommits(commits);
 
         RegressionResult regression =
-                regressionService.detectRegression(results);
+                binaryRegressionService.findRegression(commits);
+
+//        RegressionResult regression =
+//                regressionService.detectRegression(results);
 
         if (regression == null) {
             return new TimeTravelResponse(false, null);
@@ -50,7 +55,10 @@ public class TimeTravelFacade {
         RegressionDTO dto = new RegressionDTO(
                 regression.getLastPassingCommit(),
                 regression.getFirstFailingCommit(),
-                changedFiles
+                regression.getDiffs()
+                        .stream()
+                        .map(d -> d.getFilePath())
+                        .toList()
         );
 
         return new TimeTravelResponse(true, dto);
