@@ -23,14 +23,17 @@ public class TimeTravelFacade {
     private final RegressionDetectionService regressionService;
     private final GitCommitService commitService;
     private final BinaryRegressionService binaryRegressionService;
+    private final RegressionExplanationEngine explanationEngine;
 
     public TimeTravelFacade(TestExecutionFacade testExecutionFacade,
                             RegressionDetectionService regressionService, GitCommitService commitService,
-                            BinaryRegressionService binaryRegressionService) {
+                            BinaryRegressionService binaryRegressionService,
+                            RegressionExplanationEngine explanationEngine) {
         this.testExecutionFacade = testExecutionFacade;
         this.regressionService = regressionService;
         this.commitService = commitService;
         this.binaryRegressionService=binaryRegressionService;
+        this.explanationEngine = explanationEngine;
     }
 
     public TimeTravelResponse analyze() throws Exception {
@@ -50,8 +53,8 @@ public class TimeTravelFacade {
 
 
 
-//        ExplanationResult explanation =
-//                regressionExplanationEngine.explain(regression);
+        ExplanationResult explanation =
+                regressionExplanationEngine.explain(regression);
 
         if (regression == null) {
             return new TimeTravelResponse(false, null);
